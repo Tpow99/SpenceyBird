@@ -1,6 +1,7 @@
 package worlds;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import creatures.Player;
 import entities.Entity;
@@ -40,6 +41,8 @@ public class World {
 		
 		//removable entities
 		
+		if(handler.level ==0)
+		{
 		//add entities before loadWorld
 		entityManager.addEntity(new Tree(handler,32 * 28,32 * 23));
 		entityManager.addEntity(new Tree(handler,150,100));
@@ -124,7 +127,9 @@ public class World {
 		entityManager.addEntity(new Saloon2(handler, 550,970));
 		entityManager.addEntity(new  building3(handler, 350,970));
 		entityManager.addEntity(new  building2(handler, 150,970));
-				
+		
+		}		
+		
 		loadWorld(path);
 		
 		entityManager.getPlayer().setX(spawnX);
@@ -134,6 +139,11 @@ public class World {
 	
 	public void tick(){
 		entityManager.tick();
+		
+		if(handler.level == 1)
+		{
+			clearEntities(entityManager);
+		}
 	}
 	
 	public void render(Graphics g){
@@ -255,6 +265,20 @@ public class World {
 			Entity door = new Door(handler, x, y);
 			return door;
 		}
+	}
+	
+	public ArrayList<Entity> clearEntities(EntityManager entityManager)
+	{
+		ArrayList<Entity> a = entityManager.getEntities();
+		
+		for(Entity e: a)
+		{
+			e.active = false;
+		}
+		
+		return a;
+	
+		
 	}
 	
 	

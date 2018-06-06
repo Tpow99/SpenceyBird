@@ -255,7 +255,13 @@ public class Player extends Creature {
 	
 	public boolean offScreen()
 	{
-		if(((int) (x + bounds.x - handler.getGameCamera().getxOffset()) > 960) && (1216< ((int) (y + bounds.y - handler.getGameCamera().getyOffset())) && ( ((int) (y + bounds.y - handler.getGameCamera().getyOffset()))< 1248)))
+		Rectangle r = new Rectangle();
+		r.width = 32;
+		r.height = 32;
+		r.x = 960;
+		r.y = 1260;
+		
+		if(this.getCollisionBounds(0, 0).intersects(r))
 				{
 					return true;
 				}
@@ -269,7 +275,7 @@ public class Player extends Creature {
 	{
 		if(this.offScreen())
 		{
-			State.setState(handler.getGame().helpState);
+			handler.level++;
 		}
 		return null;
 	}

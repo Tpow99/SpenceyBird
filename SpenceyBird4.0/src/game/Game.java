@@ -9,6 +9,7 @@ import gfx.GameCamera;
 import input.KeyManager;
 import input.MouseManager;
 import states.GameState;
+import states.GameState2;
 import states.HelpState;
 import states.MenuState;
 import states.State;
@@ -30,6 +31,7 @@ public class Game implements Runnable {
 	public State gameState;
 	public State menuState;
 	public State helpState;
+	public State gameState2;
 	
 	//Input
 	private KeyManager keyManager;
@@ -64,6 +66,7 @@ public class Game implements Runnable {
 		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
 		helpState = new HelpState(handler);
+		gameState2 = new GameState2(handler);
 		State.setState(menuState);
 	}
 	
@@ -71,7 +74,13 @@ public class Game implements Runnable {
 		keyManager.tick();
 		
 		if(State.getState() != null)
-			State.getState().tick();
+		
+		if(handler.level == 1)
+		{
+			State.setState(gameState2);
+			
+		}
+		State.getState().tick();
 	}
 	
 	private void render(){
@@ -88,6 +97,10 @@ public class Game implements Runnable {
 		if(State.getState() != null)
 			State.getState().render(g);
 		
+		if(handler.level == 1)
+		{
+			State.setState(gameState2);
+		}
 		//End Drawing!
 		bs.show();
 		g.dispose();
@@ -119,7 +132,7 @@ public class Game implements Runnable {
 			}
 			
 			if(timer >= 1000000000){
-				System.out.println("Ticks and Frames: " + ticks +"\nScore:" + handler.getWorld().getScore());
+				System.out.println("Ticks and Frames: " + ticks +"\nScore:" + handler.getWorld().getScore() + " LEVEL:" + handler.level);
 				ticks = 0;
 				timer = 0;
 			}

@@ -4,11 +4,14 @@ import gfx.GameCamera;
 import input.KeyManager;
 import input.MouseManager;
 import worlds.World;
+import worlds.World2;
 
 public class Handler {
 	
 	private Game game;
 	private World world;
+	
+	public int level = 0;
 	
 	public Handler(Game game){
 		this.game = game;
@@ -45,9 +48,15 @@ public class Handler {
 	public World getWorld() {
 		return world;
 	}
-
-	public void setWorld(World world) {
+	
+	public void setWorld(World world)
+	{
 		this.world = world;
+	}
+
+	public void setWorld(World2 world2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
