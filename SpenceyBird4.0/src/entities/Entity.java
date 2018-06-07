@@ -14,7 +14,7 @@ public abstract class Entity {
 	protected Rectangle bounds;
 	public int health;
 	public boolean active = true;
-	
+	public Rectangle collision;
 	
 	public int getHealth() {
 		return health;
@@ -70,7 +70,11 @@ public abstract class Entity {
 	}
 	
 	public Rectangle getCollisionBounds(float xOffset, float yOffset){
-		return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
+		collision = new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
+		return collision;
+	}
+	public Rectangle removeCollision(){
+		return collision = new Rectangle((int) 0, (int) 0);
 	}
 
 	public float getX() {

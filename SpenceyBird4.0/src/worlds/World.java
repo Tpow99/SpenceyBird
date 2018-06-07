@@ -143,6 +143,7 @@ public class World {
 		if(handler.level == 1)
 		{
 			clearEntities(entityManager);
+			
 		}
 	}
 	
@@ -273,7 +274,10 @@ public class World {
 		
 		for(Entity e: a)
 		{
+			e.die();
+			e.removeCollision();
 			e.active = false;
+			
 		}
 		
 		return a;
